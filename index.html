@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EarnStar</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+      color: #111827;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    .logo {
+      width: 75px;
+      height: 75px;
+      margin: auto;
+      border-radius: 50%;
+      background: #f5c542;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      margin-top: 15px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      margin-top: 7px;
+      color: #6b7280;
+    }
+
+    .balance {
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      margin-top: 10px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .balance-title {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .stars {
+      font-size: 40px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .card h2 {
+      font-size: 19px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 13px;
+      background: #229ed9;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #9ca3af;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">⭐</div>
+    <h1>EarnStar</h1>
+    <p class="subtitle">Earn rewards through simple tasks</p>
+  </div>
+
+  <div class="balance">
+    <div class="balance-title">Your Balance</div>
+    <div class="stars">⭐ <span id="balance">0</span></div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 Daily Task</h2>
+    <p>Complete today's task and collect your reward.</p>
+    <button onclick="completeTask()">Complete Task</button>
+  </div>
+
+  <div class="card">
+    <h2>👥 Invite Friends</h2>
+    <p>Invite friends to join EarnStar.</p>
+    <button onclick="inviteFriends()">Invite Friends</button>
+  </div>
+
+  <div class="card">
+    <h2>💰 Rewards</h2>
+    <p>Your earned points can be displayed here.</p>
+    <button onclick="showRewards()">View Rewards</button>
+  </div>
+
+  <div class="footer">
+    EarnStar © 2026
+  </div>
+
+</div>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.ready();
+  tg.expand();
+
+  let balance = 0;
+
+  function completeTask() {
+    balance += 10;
+    document.getElementById("balance").textContent = balance;
+
+    tg.showAlert("Task completed! You earned 10 points.");
+  }
+
+  function inviteFriends() {
+    const botUsername = "YOUR_BOT_USERNAME";
+
+    const url =
+      "https://t.me/" +
+      botUsername +
+      "?start=ref_" +
+      (tg.initDataUnsafe.user?.id || "");
+
+    tg.openTelegramLink(url);
+  }
+
+  function showRewards() {
+    tg.showAlert(
+      "Your current balance is " +
+      balance +
+      " points."
+    );
+  }
+</script>
+
+</body>
+  </html>
