@@ -173,23 +173,13 @@
   }
 
   function inviteFriends() {
-    const botUsername = "YOUR_BOT_USERNAME";
+  const botUsername = "EarnStarAppBot";
+  const userId = tg.initDataUnsafe.user?.id || "user";
 
-    const url =
-      "https://t.me/" +
-      botUsername +
-      "?start=ref_" +
-      (tg.initDataUnsafe.user?.id || "");
+  const referralLink =
+    "https://t.me/" + botUsername + "?start=ref_" + userId;
 
-    tg.openTelegramLink(url);
-  }
-
-  function showRewards() {
-    tg.showAlert(
-      "Your current balance is " +
-      balance +
-      " points."
-    );
+  tg.showAlert("Your referral link:\n\n" + referralLink);
   }
 </script>
 
